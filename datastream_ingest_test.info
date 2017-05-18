@@ -1,0 +1,3 @@
+name = Datastream Ingest Test
+description = "Test module to show that Tuque has odd behavior"
+core = 7.x

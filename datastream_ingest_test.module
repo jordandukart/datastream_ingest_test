@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Test module to exhibit unexpected Tuque behavior.
+ */
+
+/**
+ * Implements hook_islandora_datastream_ingested().
+ */
+function datastream_ingest_test_islandora_datastream_ingested(AbstractObject $object, AbstractDatastream $datastream) {
+  $datastream_class = get_class($datastream);
+  dpm($datastream->id, "Datastream ID for {$object->id}");
+  if ($datastream_class == 'IslandoraNewFedoraDatastream') {
+    dpm('Should not be possible to have a IslandoraNewFedoraDatastream as an ingested datastream should already exist.');
+  }
+  elseif ($datastream_class == 'IslandoraFedoraDatastream') {
+    dpm('Everything is fine I am a IslandoraFedoraDatastream and I do not have an existential crisis.');
+  }
+  $created_date = isset($datastream->createdDate) ? $datastream->createdDate : 'Woops totes do not have one.';
+  dpm($created_date, 'Created date for this datastream.');
+}
